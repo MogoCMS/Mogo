@@ -1,15 +1,11 @@
- <IfModule mod_rewrite.c>
+<IfModule mod_rewrite.c>
 Options +FollowSymlinks
 Options +Indexes
 RewriteEngine on
-RewriteRule ^sitemap.xml$   index.php?uri=/sitemap    [NC,L,QSA] 
 # if your app is in a subfolder
- RewriteBase /redi-admin/
-
-# test string is a valid files
+RewriteBase /mogo/
 RewriteCond %{SCRIPT_FILENAME} !-f
-# test string is a valid directory
 RewriteCond %{SCRIPT_FILENAME} !-d
 
-RewriteRule ^(.*)$   index.php?uri=/$1    [NC,L,QSA] 
+RewriteRule ^(.*)$   index.php?uri=/$1    [NC,L,QSA]
 </IfModule>
