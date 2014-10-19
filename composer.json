@@ -2,7 +2,7 @@
     "name": "mogocms/mogo",
     "description": "the wordpress of mongodb",
     "require": {
-        "mogocms/envy": "0.1.0"
+        "mogocms/envy": "*"
     },
     "license": "GPL",
     "authors": [
