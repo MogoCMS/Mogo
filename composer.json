@@ -1,8 +1,15 @@
 {
     "name": "mogocms/mogo",
     "description": "the wordpress of mongodb",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/frontgatetickets/php-json-bomb"
+        }
+    ],
     "require": {
-        "mogocms/envy": "*"
+        "mogocms/envy": "*",
+        "frontgatetickets/php-json-bomb": "*"
     },
     "license": "GPL",
     "authors": [
@@ -10,6 +17,5 @@
             "name": "Josh Burns",
             "email": "mail@joshburns.cf"
         }
-    ],
-    "minimum-stability": "beta"
+    ]
 }
