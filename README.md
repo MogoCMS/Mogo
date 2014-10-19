@@ -18,7 +18,7 @@ Version 2 of RediMongo was designed for a radio station.
 
 It changed its name **OFFICALLY** on the 19-10-2014 to Mogo this version is all newly coded and as you will be able to see is coded from scratch.
 
-* The main template is coded for russellharrower.com and I personally will be using Mogo for my blog. 
+* The main template is coded for russellharrower.com and I personally will be using Mogo for my blog.
 
 
 ==
