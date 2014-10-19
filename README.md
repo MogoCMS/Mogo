@@ -1,16 +1,24 @@
-v3
+V1
 ==
 * UPDATED 09-07-2014
 
 Orginal work of: Russell Harrower
 
-v3 is the first public release of RediMongo - designed and coded using open source code RediMongo is a blog/website software that users are able to use with MongoDB
+v1 is the first public release of MogoCMS - designed and coded using open source code from RediMongo, and other open source projects.
 
-This script has been a work in progress from the v1 first version which was designed for a Telco company and v2 which was designed for a radio station.
+MogoCMS which from now on will be refered to as Mogo is a blog/website software that users are able to use with MongoDB
 
-v3 will is all newly coded and as you will be able to see is coded from scratch all features as of 09-07-2014 (09-Aug-2014) not working. 
+This script has been a work in progress from the v3 release of RediMongo which was also created and coded by Russell Harrower - We changed the name as we wanted to be more hip.
 
-* The main template is coded for russellharrower.com and I personally will be using v3 for my blog. 
+==
+HISTORY OF MOGO
+==
+Mogo was orginally named RediMongo in 2012 and was created for Telco company who was developing an eftpos cash back system in 2012/2013.
+Version 2 of RediMongo was designed for a radio station.
+
+It changed its name **OFFICALLY** on the 19-10-2014 to Mogo this version is all newly coded and as you will be able to see is coded from scratch.
+
+* The main template is coded for russellharrower.com and I personally will be using Mogo for my blog. 
 
 
 ==
