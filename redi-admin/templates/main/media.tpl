@@ -1,0 +1,1 @@
+<iframe border=0 name=iframe src="plugins/filemanager/dialog.php" width="100%" height="600" scrolling="no" noresize frameborder="0" ></iframe>
