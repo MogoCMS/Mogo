@@ -298,7 +298,7 @@ class syscore {
 					}
 					else
 					{
-						$msg = "<b>FACT:</b> RediMongp is powered by your coffee buys - Shout us a coffee and we will thank you on the coffee shout page - <a href='http://redimongo.com/coffe' taregt='_blank' title='RediMongo'>Coffee Shout</a>";
+						$msg = "<b>FACT:</b> RediMongp is powered by your coffee buys - Shout us a coffee and we will thank you on the coffee shout page - <a href='http://redimongo.com/coffee' taregt='_blank' title='RediMongo'>Coffee Shout</a>";
 						$alert_color = "alert-info";
 					}
 					//$alert_color = "alert-warning";
