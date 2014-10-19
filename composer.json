@@ -1,0 +1,15 @@
+{
+    "name": "mogocms/mogo",
+    "description": "the wordpress of mongodb",
+    "require": {
+        "mogocms/envy": "0.1.0"
+    },
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Josh Burns",
+            "email": "mail@joshburns.cf"
+        }
+    ],
+    "minimum-stability": "beta"
+}
