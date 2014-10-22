@@ -223,19 +223,18 @@ class syscore {
 	/*Start of menu creating*/
 	function savemenu(){
 		$collection = static::db()->menu;
-		/*if($_POST['menutask']== "url")
-		{*/
+		if($_POST['submenu']== 0)
+		{
 			$query = array("title"=>$_POST['title'],"menutask"=>$_POST['menutask'],"task"=>$_POST['task'],"menulevel"=>$_POST['menulevel']);
 			$collection->insert($query);
-		/*}
-		else{
+		}
+		elseif($_POST['submenu']== 1){
 			$query = array("_id"=>new MongoId($_POST['menulevel']));
 			$data = array('$push' => array("submenu"=>array("title"=>$_POST['title'],"menutask"=>$_POST['menutask'],"task"=>$_POST['task'])));
 			$options = array("upsert" => true);
 			$collection->update( $query, $data, $options );
 		//$query = array("title"=>$_POST['title'],"menutask"=>$_POST['menutask'],"task"=>new MongoId($_POST['task']),"menulevel"=>$_POST['menulevel']);
-	}*/
-
+	 }
 	}
 
 	function reordermenu(){

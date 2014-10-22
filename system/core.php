@@ -38,6 +38,41 @@ class syscore {
 
 	}
 
+
+	/*MAIN FETCHING CODE*/
+	function load_blog($r = null){
+		$blog = array();
+		$collection = static::db()->posts;
+		if($r == null)
+		{
+		$cursor = $collection->find(array("status"=>"publish","contenttype"=>"post"))->sort(array('_id'=>1))->limit(10);
+		}
+		else
+		{
+		$cursor = $collection->find(array("_id"=> array('$gt'=>new MongoId($r)),"status"=>"publish", "contenttype"=>"post"))->limit(10);
+		}
+
+		if ($cursor->count() > 0)
+		{
+			// iterate through the results
+			while( $cursor->hasNext() ) {
+					$blog[] = ($cursor->getNext());
+			}
+			return $blog;
+		}
+		else
+		{
+
+		}
+
+
+	}
+
+	function fetch_link($e){
+		$collection = static::db()->posts;
+		return $collection->findOne(array("_id"=>new MongoId($e)),array("url"));
+	}
+
 	function fetch_menus(){
 		$menus = array();
 		$collection = static::db()->menu;
@@ -51,12 +86,14 @@ class syscore {
 		}
 		else
 		{
-			//var_dump($this->db->lastError());
+		//var_dump($this->db->lastError());
 		}
 		return $menus;
 	}
-
+	/*END*/
 	public function fetchmenuitem($task){
+		global $menu;
+		$menu = self::fetch_menus();
 		include("templates/main/header.tpl");
 		//$collection = static::db()->menu;
 		//$task = $collection->findOne(array("name"=>$task));

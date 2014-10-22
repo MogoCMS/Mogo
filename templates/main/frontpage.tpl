@@ -10,103 +10,31 @@
 
 <div class="row top-buffer">
 
+<?php
+$blog = Syscore::load_blog();
 
+foreach($blog as $post)
+{
+?>
   <div class="col-lg-4 col-md-4 col-sm-4">
     <div class="thumbnail">
       <img data-src="holder.js/300x150" alt="...">
       <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3><?=$post['title'];?></h3>
+        <p>
+        <?php
+          $content = $post['content'];
+          preg_match('/^([^.!?]*[\.!?]+){0,3}/', strip_tags($content), $abstract);
+          print_r($abstract);
+          echo $abstract[0];
+        ?>...</p>
+        <p><a href="<?=SITEURL;?>/<?=$post['url'];?> class="btn btn-default" role="button">Read More</a></p>
       </div>
     </div>
   </div>
-  
-    <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-
- <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-
- <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-
- <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-
- <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-
- <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
- <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
- <div class="col-lg-4 col-md-4 col-sm-4">
-    <div class="thumbnail">
-      <img data-src="holder.js/300x150" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
+<?php
+}
+?>
 
 
 </div>

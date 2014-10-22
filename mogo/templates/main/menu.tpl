@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-      
+
    </div>
    <div class="panel-body">
        <form method="POST" action="#re-order">
@@ -36,11 +36,11 @@
                    $a++;
                 }
               ?>
-              
+
             </tbody>
           </table>
           <br>
-         
+
    </div>
    <div class="panel-footer">
         <button type="submit" class="btn btn-primary" style="width:100% !important;">Re-Order</button>
