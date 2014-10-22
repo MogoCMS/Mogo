@@ -23,9 +23,8 @@ foreach($blog as $post)
         <h3><?=$post['title'];?></h3>
         <p>
         <?php
-          $content = $post['content'];
+          $content = html_entity_decode($post['content']);
           preg_match('/^([^.!?]*[\.!?]+){0,3}/', strip_tags($content), $abstract);
-          print_r($abstract);
           echo $abstract[0];
         ?>...</p>
         <p><a href="<?=SITEURL;?>/<?=$post['url'];?> class="btn btn-default" role="button">Read More</a></p>
