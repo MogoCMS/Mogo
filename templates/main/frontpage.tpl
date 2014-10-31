@@ -27,7 +27,7 @@ foreach($blog as $post)
           preg_match('/^([^.!?]*[\.!?]+){0,3}/', strip_tags($content), $abstract);
           echo $abstract[0];
         ?>...</p>
-        <p><a href="<?=SITEURL;?>/<?=$post['url'];?> class="btn btn-default" role="button">Read More</a></p>
+        <p><a href="//<?=SITEURL;?>/<?=$post['url'];?>" class="btn btn-default" role="button">Read More</a></p>
       </div>
     </div>
   </div>
