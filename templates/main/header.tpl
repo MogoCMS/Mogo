@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="//sysbs.com/templates/main/style/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//<?=SITEURL;?>/templates/main/style/css/bootstrap.min.css">
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="//sysbs.com/templates/main/style/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="//<?=SITEURL;?>/templates/main/style/css/bootstrap-theme.min.css">
 
-        <link rel="stylesheet" href="//sysbs.com/templates/main/style/css/russellharrower.css">
+        <link rel="stylesheet" href="//<?=SITEURL;?>/templates/main/style/css/russellharrower.css">
         <!-- Latest compiled and minified JavaScript -->
 
-        <script src="//sysbs.com/templates/main/js/jquery-1.11.1.min.js"></script>
+        <script src="//<?=SITEURL;?>/templates/main/js/jquery-1.11.1.min.js"></script>
     </head>
     <body>
 
@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" rel="home"  href="#"><img src="//sysbs.com/templates/main/images/small-logo.png" width="40" height="40" alt="RussellHarrower.com"></a>
+                <a class="navbar-brand" rel="home"  href="#"><img src="//<?=SITEURL;?>/templates/main/images/small-logo.png" width="40" height="40" alt="RussellHarrower.com"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,7 +51,7 @@
                         <?php if(URI_1 == $link){
                            echo 'class="active"';
                         }
-                        ?>><a href="<?=SITEURL;?><?=$item['url'];?>"><?=$item['title'];?></a></li>
+                        ?>><a href="//<?=SITEURL;?><?=$item['url'];?>"><?=$item['title'];?></a></li>
                       <?php
                       }
                       else
@@ -62,7 +62,7 @@
                                echo ' active';
                             }?>
                             ">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$item['title'];?><span class="caret"></span></a>
+                              <a href="//<?=SITEURL;?><?=$item['url'];?>" class="dropdown-toggle" data-toggle="dropdown"><?=$item['title'];?><span class="caret"></span></a>
                                   <ul class="dropdown-menu" role="menu">
                                     <?php
                                           foreach($item['submenu'] as $submenu)
