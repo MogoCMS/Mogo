@@ -93,7 +93,8 @@ class syscore {
     			$_SESSION["user"] = rand(178116717717,187156715671567156715761576157614652456246);
 			}
 				$_SESSION["user_information"] = $test;
-		 	header("Location: index.php");
+		 	//header("Location: index.php");
+			print_r($_SESSION);
 		}
 		else
 		{

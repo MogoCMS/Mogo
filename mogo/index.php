@@ -1,5 +1,5 @@
 <?php
-//phpinfo();die;
+//phpinfo();
 error_reporting(E_ALL);
 session_start();
 require_once("../system/limon/limonade.php");
@@ -19,8 +19,8 @@ if(file_exists("install.php")){
 	die();
 }
 
-dispatch_get("/**", array($redi, 'fetchmenuitem'));
 dispatch_post("/login", array($redi, 'loginproccess'));
+dispatch_get("/**", array($redi, 'fetchmenuitem'));
 dispatch_post("/**", array($redi, 'fetchmenuitem'));
 
 
