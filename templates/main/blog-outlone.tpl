@@ -3,7 +3,7 @@
          <h1 class="sitename">RussellHarrower.com</h1><h2 class="tagline">Who knows where life will take you!</h2>
      </div>
 </div>
-<div class="container">
+<div class="container top-buffer">
 <div class="row">
 
             <!-- Blog Post Content Column -->

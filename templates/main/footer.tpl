@@ -5,7 +5,7 @@
         <p class="credit text-left">&copy; 2014 <a href="http://russellharrower.com">Russell Harrower</a></p>
         </div>
         <div class="pull-right">
-         <p class="credit text-right">Powered By <a href="http://mogo.xyz">Mogo</a> v3</p>
+         <p class="credit text-right">Powered By <a href="http://mogoproject.xyz">MogoProject</a> v1</p>
         </div>
         
       </div>
