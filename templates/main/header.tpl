@@ -2,6 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <title><?=$title;?></title>
+    <meta name="keywords" content="<?=$meta['keywords'];?>" />
+   	<meta name="description" content="<?=$meta['desc'];?>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -38,42 +41,52 @@
                 <?php
                     foreach($menu as $item){
                       if(empty($item['submenu'])){
-                        if(MongoId::isValid ($item['task']) === 1)
+                        if(MongoId::isValid ($item['task']) == 1)
                         {
-                          $link = $redi->fetch_link($item['task']);
+                          $link = self::fetch_link($item['task']);
+                          
                         }
                         else
                         {
-                          $link = $item['task'];
+                          $link = array();
+                          $link['url'] = $item['task'];
                         }
                       ?>
-                        <li
-                        <?php if(URI_1 == $link){
-                           echo 'class="active"';
-                        }
-                        ?>><a href="//<?=SITEURL;?><?=$item['url'];?>"><?=$item['title'];?></a></li>
+                       
+                        <li <?php if(URI_1 == $link['url']){echo 'class="active"';}?>><a href="//<?=SITEURL;?>/<?=$link['url'];?>"><?=$item['title'];?></a></li>
                       <?php
                       }
                       else
                       {
+                      	if(MongoId::isValid ($item['task']) == 1)
+                        {
+                          $link = self::fetch_link($item['task']);
+                          
+                        }
+                        else
+                        {
+                          $link = array();
+                          $link['url'] = $item['task'];
+                        }
                       ?>
                             <li class="dropdown
                             <?php if(URI_1 == $link){
                                echo ' active';
                             }?>
                             ">
-                              <a href="//<?=SITEURL;?><?=$item['url'];?>" class="dropdown-toggle" data-toggle="dropdown"><?=$item['title'];?><span class="caret"></span></a>
+                              <a href="//<?=SITEURL;?>/<?=$link['url'];?>" class="dropdown-toggle" data-toggle="dropdown"><?=$item['title'];?><span class="caret"></span></a>
                                   <ul class="dropdown-menu" role="menu">
                                     <?php
                                           foreach($item['submenu'] as $submenu)
                                           {
-                                            if(MongoId::isValid ($submenu['task']) === 1)
+                                            if(MongoId::isValid ($submenu['task']) == 1)
                                             {
-                                              $link = $redi->fetch_link($submenu['task']);
+                                              $link = self::fetch_link($submenu['task']);
                                             }
                                             else
                                             {
-                                              $link = $submenu['task'];
+                                           	$link = array();
+                                            $link['url'] = $submenu['task'];
                                             }
                                             ?>
                                             <li
@@ -82,7 +95,7 @@
                                                echo 'class="active"';
                                             }
 
-                                            echo '><a href="'; print SITEURL."".$item['title']; echo'">';
+                                            echo '><a href="//'; print SITEURL."/".$link['url']; echo'">';
                                             print $submenu['title'];
                                             echo '</a></li>';
 

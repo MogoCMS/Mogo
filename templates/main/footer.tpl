@@ -10,7 +10,7 @@
         
       </div>
     </div>
-     <script src="//sysbs.com/templates/main/js/holder.js"></script>
-    <script src="//sysbs.com/templates/main/js/bootstrap.min.js"></script>
+     <script src="//<?=SITEURL;?>/templates/main/js/holder.js"></script>
+    <script src="//<?=SITEURL;?>/templates/main/js/bootstrap.min.js"></script>
     </body>
 </html>

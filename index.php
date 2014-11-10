@@ -16,14 +16,15 @@ foreach($uris as $u)
   }
   else
   {
-  define("URI_0", NULL);  
+  define("URI_0", NULL);
   }
   $i++;
 }
 $redi = new syscore();
 $redi->settings();
 
-dispatch_get("/*", array($redi, 'fetchmenuitem'));
+dispatch("/**", array($redi, 'fetchmenuitem'));
+dispatch("/**", array($redi, 'fetchmenuitem'));
 
 run();
 ?>

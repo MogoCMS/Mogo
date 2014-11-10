@@ -91,14 +91,64 @@ class syscore {
 		return $menus;
 	}
 	/*END*/
+	
+	/*LETS GET THE CONTENT*/
+	function page_or_post($url){
+		$collection = static::db()->posts;
+		$result = $collection->findOne(array('url'=>$url));
+		return $result;
+	}
+	 
+	/* END */
+	
 	public function fetchmenuitem($task){
 		global $menu;
+		global $title,$meta,$content;
+		if(!empty($_REQUEST['uri']))
+		{
+		$check = ltrim ($_REQUEST['uri'], '/');
+		$popost =  self::page_or_post($check);
+		}
 		$menu = self::fetch_menus();
+		if(!empty($popost))
+		{
+			switch ($popost['contenttype']) {
+				case 'page':
+					$title = $popost['title']." :: Russell Harrower";
+					$meta['keywords'] = $popost['keywords'];
+					$meta['desc'] = $popost['description'];
+				break;
+				default:
+				
+				break;
+			}
+		}
+		else
+		{
+			
+		}
+		
+		
 		include("templates/main/header.tpl");
-		//$collection = static::db()->menu;
-		//$task = $collection->findOne(array("name"=>$task));
-		//self::page_or_blog();
-		include("templates/main/frontpage.tpl");
+		if(!empty($popost))
+		{
+			$content['title'] = $popost['title'];
+			$content['content'] = htmlspecialchars_decode($popost['content']);
+			//$content['image'] = $popost['title'];
+
+			switch ($popost['contenttype']) {
+				case 'page':
+					include("templates/main/page.tpl");
+				break;
+				
+				default:
+							include("templates/main/blog.tpl");
+				break;
+			}
+		}
+		else {
+			include("templates/main/frontpage.tpl");
+		}
 		include("templates/main/footer.tpl");
 	}
 
