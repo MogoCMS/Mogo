@@ -118,8 +118,13 @@ class syscore {
 					$meta['keywords'] = $popost['keywords'];
 					$meta['desc'] = $popost['description'];
 				break;
+				case 'post':
+					$title = $popost['title']." :: Russell Harrower";
+					$meta['keywords'] = $popost['keywords'];
+					$meta['desc'] = $popost['description'];
+				break;
 				default:
-				
+					
 				break;
 			}
 		}
@@ -133,6 +138,8 @@ class syscore {
 		if(!empty($popost))
 		{
 			$content['title'] = $popost['title'];
+			$content['date'] = $popost['date']->sec;
+			$content['author'] = $popost['author'];
 			$content['content'] = htmlspecialchars_decode($popost['content']);
 			//$content['image'] = $popost['title'];
 
