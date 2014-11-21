@@ -45,7 +45,7 @@ class syscore {
 		$collection = static::db()->posts;
 		if($r == null)
 		{
-		$cursor = $collection->find(array("status"=>"publish","contenttype"=>"post"))->sort(array('_id'=>1))->limit(10);
+		$cursor = $collection->find(array("status"=>"publish","contenttype"=>"post"))->sort(array('_id'=>-1))->limit(10);
 		}
 		else
 		{
@@ -62,10 +62,16 @@ class syscore {
 		}
 		else
 		{
-
+			return null;
 		}
 
 
+	}
+	
+	function limit_words($string, $word_limit)
+	{
+		$words = explode(" ",$string);
+		return implode(" ",array_splice($words,0,$word_limit));
 	}
 
 	function fetch_link($e){
@@ -98,59 +104,98 @@ class syscore {
 		$result = $collection->findOne(array('url'=>$url));
 		return $result;
 	}
-	 
 	/* END */
+	
+	/*Searches to see if it falls under a category*/
+	function is_cat($url){
+		$collection = static::db()->categories;
+		$result = $collection->findOne(array('category'=> new MongoRegex("/^$url/i")));
+		return $result;
+	}
 	
 	public function fetchmenuitem($task){
 		global $menu;
 		global $title,$meta,$content;
 		if(!empty($_REQUEST['uri']))
 		{
-		$check = ltrim ($_REQUEST['uri'], '/');
+		$check = ltrim($_REQUEST['uri'], '/');
 		$popost =  self::page_or_post($check);
+		$cat =  self::is_cat($check);
 		}
 		$menu = self::fetch_menus();
-		if(!empty($popost))
+		
+		
+		if(!empty($popost) OR !empty($cat))
 		{
 			switch ($popost['contenttype']) {
 				case 'page':
 					$title = $popost['title']." :: Russell Harrower";
 					$meta['keywords'] = $popost['keywords'];
 					$meta['desc'] = $popost['description'];
+					$meta['image'] = $popost['main_image'];
 				break;
 				case 'post':
 					$title = $popost['title']." :: Russell Harrower";
 					$meta['keywords'] = $popost['keywords'];
 					$meta['desc'] = $popost['description'];
+					if(!empty($popost['main_image'])){$meta['image'] = $popost['main_image'];}
 				break;
 				default:
-					
+					$title = "Official Site :: Russell Harrower";
+					$meta['keywords'] = "Russell Harrower, Official Website Russell Harrower, Russell Harrower blog, Russell Harrower Radio Presenter, Radio Personal Russell (Rusty) Harrower";
+					$meta['desc'] = "Entrepreneur, Radio Host/Presenter, Pet Lover, Fostercare Survivor, Child Advocate for Kids in Care - These are just some of the things that Russell Harrower talks about from his life as a foster childer to what he has made of himself. Told he would go to hell for being gay, HIV in 2009 and going though many fosterhomes where he was bashed,raped etc Russell is still able to keep his head high found out how.";
 				break;
+			}
+			if(!empty($cat)){
+				print_r($cat);
 			}
 		}
 		else
 		{
+			$title = "Official Site :: Russell Harrower";
+			$meta['keywords'] = "Russell Harrower, Official Website Russell Harrower, Russell Harrower blog, Russell Harrower Radio Presenter, Radio Personal Russell (Rusty) Harrower";
+			$meta['desc'] = "Entrepreneur, Radio Host/Presenter, Pet Lover, Fostercare Survivor, Child Advocate for Kids in Care - These are just some of the things that Russell Harrower talks about from his life as a foster childer to what he has made of himself. Told he would go to hell for being gay, HIV in 2009 and going though many fosterhomes where he was bashed,raped etc Russell is still able to keep his head high found out how.";
+			
+			if(!empty($check) != null)
+			{
+				$error = true;
+				$title = "404 :: Russell Harrower";
+				$meta['keywords'] = "Russell Harrower, Official Website Russell Harrower, Russell Harrower blog, Russell Harrower Radio Presenter, Radio Personal Russell (Rusty) Harrower";
+				$meta['desc'] = "nothing here - 404 page.";
+			
+			}
 			
 		}
 		
 		
 		include("templates/main/header.tpl");
-		if(!empty($popost))
+		if(!empty($popost) || !empty($error))
 		{
-			$content['title'] = $popost['title'];
-			$content['date'] = $popost['date']->sec;
-			$content['author'] = $popost['author'];
-			$content['content'] = htmlspecialchars_decode($popost['content']);
-			//$content['image'] = $popost['title'];
-
+			if(!empty($popost) )
+			{
+				$content['title'] = $popost['title'];
+				$content['date'] = $popost['date']->sec;
+				$content['author'] = $popost['author'];
+				if(!empty($popost['main_image'])){$content['main_image'] = $popost['main_image'];}
+				$content['content'] = htmlspecialchars_decode($popost['content']);
+				//$content['mainimage'] = $popost['title'];
+			
 			switch ($popost['contenttype']) {
 				case 'page':
 					include("templates/main/page.tpl");
 				break;
-				
+				case 'past':
+					include("templates/main/blog.tpl");
+				break;
 				default:
 							include("templates/main/blog.tpl");
 				break;
+				}
+			}
+			if(isset($error) == true)
+			{
+				echo '<div style="margin:0 auto; width:980px !important;"><img src="http://russellharrower.com/redi-upload/404-error-page.jpg" alt="404" align="center"></div>'; 
+				die;
 			}
 		}
 		else {
