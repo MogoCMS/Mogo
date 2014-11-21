@@ -5,6 +5,19 @@
     <title><?=$title;?></title>
     <meta name="keywords" content="<?=$meta['keywords'];?>" />
    	<meta name="description" content="<?=$meta['desc'];?>" />
+   	<meta name="twitter:card" value="summary">
+   	<meta name="twitter:site" content="@russellharrower">
+	<meta name="twitter:title" content="<?=$title;?>">
+	<meta name="twitter:description" content="<?=$meta['desc'];?>">
+	<meta name="twitter:creator" content="@russellharrower">
+	<meta name="twitter:image" content="<?=$meta['image'];?>">
+   	
+   	<meta property="og:title" content="<?=$title;?>" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="//<?=SITEURL;?><?=$_REQUEST['uri'];?>" />
+	<meta property="og:image" content="<?=$meta['image'];?>" />
+	<meta property="og:description" content="<?=$meta['desc'];?>" />
+   	
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,6 +31,9 @@
         <!-- Latest compiled and minified JavaScript -->
 
         <script src="//<?=SITEURL;?>/templates/main/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript">var switchTo5x=true;</script>
+   		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "13ba6589-afa9-47f8-b363-211f275df0e4", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
     </head>
     <body>
 
@@ -52,7 +68,6 @@
                           $link['url'] = $item['task'];
                         }
                       ?>
-                       
                         <li <?php if(URI_1 == $link['url']){echo 'class="active"';}?>><a href="//<?=SITEURL;?>/<?=$link['url'];?>"><?=$item['title'];?></a></li>
                       <?php
                       }
@@ -101,6 +116,7 @@
 
                                           }
                                     ?>
+                                    </ul>
                             </li>
                         <?php
                       }
