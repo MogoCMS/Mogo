@@ -1,7 +1,7 @@
 <?php
 global $SITETEMP;
 global $M;
-
+global $pfirstid;
 
 class syscore {
 	static public $_db;
@@ -38,18 +38,32 @@ class syscore {
 
 	}
 
+	function getfirst_blog_id()
+	{
+		
+		$collection = static::db()->posts;
+		$jsonstring = $collection->findOne(array("status"=>"publish","contenttype"=>"post"));
+		return $jsonstring['_id'];
+	}
 
 	/*MAIN FETCHING CODE*/
+	function fetch_more()
+	{
+		$r = $_REQUEST['qid'];
+		return json_encode(self::load_blog($r));
+	}
+	
 	function load_blog($r = null){
+		
 		$blog = array();
 		$collection = static::db()->posts;
 		if($r == null)
 		{
-		$cursor = $collection->find(array("status"=>"publish","contenttype"=>"post"))->sort(array('_id'=>-1))->limit(10);
+		$cursor = $collection->find(array("status"=>"publish","contenttype"=>"post"))->sort(array('_id'=>-1))->limit(9);
 		}
 		else
 		{
-		$cursor = $collection->find(array("_id"=> array('$gt'=>new MongoId($r)),"status"=>"publish", "contenttype"=>"post"))->limit(10);
+		$cursor = $collection->find(array("_id"=> array('$lt'=>new MongoId($r)),"status"=>"publish", "contenttype"=>"post"))->sort(array('_id'=>-1))->limit(9);
 		}
 
 		if ($cursor->count() > 0)

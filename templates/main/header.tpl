@@ -32,8 +32,6 @@
 
         <script src="//<?=SITEURL;?>/templates/main/js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript">var switchTo5x=true;</script>
-   		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-		<script type="text/javascript">stLight.options({publisher: "13ba6589-afa9-47f8-b363-211f275df0e4", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
     </head>
     <body>
 

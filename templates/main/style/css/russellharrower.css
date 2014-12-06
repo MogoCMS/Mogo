@@ -3,6 +3,7 @@ body{background:#fff;padding-bottom: 70px;}
 @navbar-brand-vpadding: 5px;
 .top-buffer { margin-top:20px; }
 
+
 #footer {
    height: 60px;
    margin-top:10px;
@@ -88,6 +89,7 @@ h2.tagline{
 	}
 }
 @media only screen and (max-width : 768px) {
+
  .row {
 margin-right:15px;
 margin-left: 15px;

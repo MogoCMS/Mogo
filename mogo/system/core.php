@@ -76,7 +76,8 @@ class syscore {
 		$salt = $collection->findOne(array("_id"=>new MongoId($user['salt'])));
 		$password =  hash('sha512', $salt['salt'].$_POST['password'].$salt['salt'], FALSE);
 
-		if($user['password'] == $password){
+		if($user['password'] == $password)
+		{
 			$collection = static::db()->members;
 			$cursor = $collection->find(array("_id"=>new MongoId($user['_id'])),
 			array("_id","profile.picture","mydetails.name.first","mydetails.name.last"));
@@ -93,8 +94,7 @@ class syscore {
     			$_SESSION["user"] = rand(178116717717,187156715671567156715761576157614652456246);
 			}
 				$_SESSION["user_information"] = $test;
-		 	//header("Location: index.php");
-			print_r($_SESSION);
+		 	header("Location: index.php");
 		}
 		else
 		{
@@ -137,7 +137,7 @@ class syscore {
 	/*Tips*/
 	function loadtip($area){
 		$tips = array();
-		$collection = static::db()->redimongocore;
+		$collection = static::db()->MogoProjectcore;
 		$cursor = $collection->find(array ('$or'=> array ( 0 => array ('type' => $area,),1 =>array ('type' => 'any', ),),))->limit(-1)->skip(mt_rand(0, $collection->count()));
 		if ($cursor->count() > 0)
 		{
@@ -191,22 +191,47 @@ class syscore {
 	/*Creating and Editing Pages/Post*/
 	function savepost(){
 		if($_POST['status'] == 'wait'){
-			$publish = $_POST['publishdate'];
+			$publish = new MongoDate(strtotime($_POST['publishdate']." 00:00:00"));
 		}
 		else
 		{
 			$publish = new MongoDate();
 		}
-
 		$collection = static::db()->posts;
-		$collection->insert(array("title"=>htmlentities($_POST['title']),"url"=>$_POST['url'],"content"=>htmlentities($_POST['content']),"status"=>$_POST['status'],"date"=>$publish,"authorID"=>new MongoId($_POST['authorID']),"author"=>$_POST['author'],"category"=>$_POST['category'],"description"=>htmlentities($_POST['description']),"keywords"=>htmlentities($_POST['keywords']),"contenttype"=>$_POST["contenttype"]));
+		$collection->insert(array("main_image"=>$_POST['main_image'],"title"=>htmlentities($_POST['title']),"url"=>$_POST['url'],"content"=>htmlentities($_POST['content']),"status"=>$_POST['status'],"date"=>$publish,"authorID"=>new MongoId($_POST['authorID']),"author"=>$_POST['author'],"category"=>$_POST['category'],"description"=>htmlentities($_POST['description']),"keywords"=>htmlentities($_POST['keywords']),"contenttype"=>$_POST["contenttype"]));
+	}
+
+	function update_savepost(){
+		if($_POST['status'] == 'wait'){
+			$publish = new MongoDate(strtotime($_POST['publishdate']." 00:00:00"));
+		}
+		else
+		{
+			$publish = new MongoDate();
+		}
+		$collection = static::db()->posts;
+		$collection->update(array('_id'=>new MongoId($_POST['_id'])),
+							array("main_image"=>$_POST['main_image'],
+									"title"=>htmlentities($_POST['title']),
+									"url"=>$_POST['url'],
+									"content"=>htmlentities($_POST['content']),
+									"status"=>$_POST['status'],
+									"date"=>$publish,
+									"authorID"=>new MongoId($_POST['authorID']),
+									"author"=>$_POST['author'],
+									"category"=>$_POST['category'],
+									"description"=>htmlentities($_POST['description']),
+									"keywords"=>htmlentities($_POST['keywords']),
+									"contenttype"=>$_POST["contenttype"]),
+							array('upsert'=>true));
+							
 	}
 
 	function fetchdata($type){
 		$items = array();
 		$collection = static::db()->posts;
 		$search = array("contenttype"=>$type);
-		$cursor = $collection->find($search);
+		$cursor = $collection->find($search)->sort(array("_id"=>-1));
 		if ($cursor->count() > 0)
 		{
 			// iterate through the results
@@ -250,6 +275,12 @@ class syscore {
 	}
 	/*End of menu creating*/
 
+	/*LETS GET THE CONTENT*/
+	function fetch_post($uid){
+		$collection = static::db()->posts;
+		$result = $collection->findOne(array('_id'=>new MongoId($uid)));
+		return $result;
+	}
 
 
 
@@ -265,6 +296,7 @@ class syscore {
 		}
 		else
 		{
+			
 			switch ($task) {
 				case 'create':
 					$categories = self::fetch_categories();
@@ -280,6 +312,15 @@ class syscore {
 					{
 					include("templates/main/create-posts.tpl");
 					}
+				break;
+				case 'edit_post':
+					if(!empty($_POST)){
+						self::update_savepost();
+					}
+					$categories = self::fetch_categories();
+					global $post;
+					$post = self::fetch_post($_REQUEST['uid']);
+					include("templates/main/edit_post.tpl");
 				break;
 				case 'media':
 					include("templates/main/media.tpl");
@@ -298,7 +339,7 @@ class syscore {
 					}
 					else
 					{
-						$msg = "<b>FACT:</b> RediMongp is powered by your coffee buys - Shout us a coffee and we will thank you on the coffee shout page - <a href='http://redimongo.com/coffee' taregt='_blank' title='RediMongo'>Coffee Shout</a>";
+						$msg = "<b>FACT:</b> MogoProject is powered by your coffee buys - Shout us a coffee and we will thank you on the coffee shout page - <a href='http://MogoProject.xyz/coffee' taregt='_blank' title='MogoProject'>Coffee Shout</a>";
 						$alert_color = "alert-info";
 					}
 					//$alert_color = "alert-warning";

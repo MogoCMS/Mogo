@@ -8,7 +8,7 @@
 <div class="container" style="margin; 0 5px;">
 
 
-<div class="row top-buffer">
+<div id="content" class="row top-buffer">
 
 <?php
 $blog = Syscore::load_blog();
@@ -40,16 +40,23 @@ foreach($blog as $post)
     </div>
   </div>
 <?php
-$o++;
+	$o++;
     if($o > 2)
     {
     $o = 0; echo ' <div class="clearfix visible-md-block" style="width:100% !important; float:left; display:block !important; height:2px !important;"></div>';
     }
+	$lastid = $post['_id'];
 }
 ?>
 
 
 </div>
-
+<script>
+	var last_id = '<?=Syscore::getfirst_blog_id();?>';
+	 var id='<?=$lastid;?>';
+	 //alert(id);
+</script>
+<script src="//<?=SITEURL;?>/templates/main/js/main.js"></script>
+<button id="loadmore" class="btn btn-block btn-default" onclick="loadmore();">Load More here</button>
 
 </div>
