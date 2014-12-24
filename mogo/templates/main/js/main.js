@@ -37,11 +37,11 @@ $(document).on('change', 'select[name=status]', function(){
 
 function permalink(e){
 	var title = document.getElementById("titlecreate").value;
-	document.getElementById('url').value =  title.toLowerCase().replace(/ /g,"_").replace("'","");
+	document.getElementById('url').value =  title.toLowerCase().replace(/ /g,"-").replace("'","");
 }
 
 function permalinkblog(e){
 	var title = document.getElementById("titlecreate").value;
 	var category = $("#category  option:selected").text();
-	document.getElementById('url').value =  category.toLowerCase().replace(/ /g,"_").replace("'","")+"/"+title.toLowerCase().replace(/ /g,"_").replace("'","");
+	document.getElementById('url').value =  category.toLowerCase().replace(/ /g,"-").replace("'","")+"/"+title.toLowerCase().replace(/ /g,"-").replace("'","");
 }
