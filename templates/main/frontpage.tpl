@@ -11,8 +11,7 @@
 <div id="content" class="row top-buffer">
 
 <?php
-$blog = Syscore::load_blog();
-$o = 0; 
+$o = 0;
 foreach($blog as $post)
 {
 ?>
@@ -26,7 +25,7 @@ foreach($blog as $post)
 	else{
 		echo '<img data-src="holder.js/300x150" alt="...">';
 	}
-	?>    
+	?>
       <div class="caption">
         <h3><?=$post['title'];?></h3>
         <p>
@@ -47,13 +46,14 @@ foreach($blog as $post)
     }
 	$lastid = $post['_id'];
 }
+  if(!empty($cat)){$cat = $cat['_id'];}
 ?>
-
 
 </div>
 <script>
 	var last_id = '<?=Syscore::getfirst_blog_id();?>';
-	 var id='<?=$lastid;?>';
+	var id='<?=$lastid;?>';
+  var cat='<?=$cat;?>';
 	 //alert(id);
 </script>
 <script src="//<?=SITEURL;?>/templates/main/js/main.js"></script>
